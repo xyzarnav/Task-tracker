@@ -9,6 +9,9 @@ import {
 } from "./utils/localStorage";
 import Login from "./components/Login";
 import Header from "./components/Header";
+import TaskForm from "./components/TaskForm";
+import TaskFilter from "./components/TaskFilter";
+import TaskList from "./components/TaskList";
 
 function App() {
   // Simplified state management - single state object
@@ -72,6 +75,49 @@ function App() {
     updateState({ tasks: updatedTasks, editingTask: null });
   };
 
+  const handleDeleteTask = (id) => {
+    const updatedTasks = appState.tasks.filter((task) => task.id !== id);
+    updateState({ tasks: updatedTasks });
+  };
+
+  const handleToggleComplete = (id) => {
+    const updatedTasks = appState.tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    );
+    updateState({ tasks: updatedTasks });
+  };
+
+  const handleStartEdit = (task) => {
+    updateState({ editingTask: task });
+  };
+
+  const handleCancelEdit = () => {
+    updateState({ editingTask: null });
+  };
+
+  // Filter and search tasks
+  const filteredTasks = appState.tasks.filter((task) => {
+    // Apply filter
+    let matchesFilter = true;
+    if (appState.filter === "completed") {
+      matchesFilter = task.completed;
+    } else if (appState.filter === "pending") {
+      matchesFilter = !task.completed;
+    }
+
+    // Apply search
+    let matchesSearch = true;
+    if (appState.searchQuery.trim()) {
+      const query = appState.searchQuery.toLowerCase();
+      matchesSearch =
+        task.title.toLowerCase().includes(query) ||
+        (task.description && task.description.toLowerCase().includes(query)) ||
+        (task.category && task.category.toLowerCase().includes(query));
+    }
+
+    return matchesFilter && matchesSearch;
+  });
+
   // Calculate task counts
   const taskCounts = {
     all: appState.tasks.length,
@@ -89,10 +135,6 @@ function App() {
     return <Login onLogin={handleLogin} />;
   }
 
-  const handleCancelEdit = () => {
-    updateState({ editingTask: null });
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50">
       <Header
@@ -107,6 +149,22 @@ function App() {
           onCancel={appState.editingTask ? handleCancelEdit : undefined}
           editingTask={appState.editingTask}
           isInline={!!appState.editingTask}
+        />
+
+        <TaskFilter
+          currentFilter={appState.filter}
+          onFilterChange={(filter) => updateState({ filter })}
+          taskCounts={taskCounts}
+          searchQuery={appState.searchQuery}
+          onSearchChange={(searchQuery) => updateState({ searchQuery })}
+        />
+
+        <TaskList
+          tasks={filteredTasks}
+          onToggleComplete={handleToggleComplete}
+          onEdit={handleStartEdit}
+          onDelete={handleDeleteTask}
+          searchQuery={appState.searchQuery}
         />
       </main>
     </div>
