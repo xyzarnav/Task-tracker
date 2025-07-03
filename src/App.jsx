@@ -7,7 +7,7 @@ import {
   clearUserFromStorage,
   initializeSampleData,
 } from "./utils/localStorage";
-import Login from "./components/Login";
+import Login from "./components/Login"
 import Header from "./components/Header";
 import TaskForm from "./components/Taskform";
 import TaskFilter from "./components/TaskFilter";
