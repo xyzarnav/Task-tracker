@@ -12,6 +12,10 @@ A modern, visually appealing task management app built with **React**, **Vite**,
 - 🌗 Theme toggle (dark/light mode)
 - 📱 Mobile-friendly and responsive design
 
+## 🌐 Live Demo
+
+Try it out: [https://task-tracker-green-delta.vercel.app/](https://task-tracker-green-delta.vercel.app/)
+
 ## 🚀 Getting Started
 
 ### 1. Install dependencies
