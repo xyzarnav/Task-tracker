@@ -65,7 +65,7 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
       <div>
         <label
           htmlFor="title"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
         >
           Task Title *
         </label>
@@ -74,7 +74,7 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
           id="title"
           value={formData.title}
           onChange={(e) => handleChange("title", e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
           placeholder="Enter task title"
           required
         />
@@ -83,7 +83,7 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
       <div>
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
         >
           Description
         </label>
@@ -92,21 +92,21 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
           value={formData.description}
           onChange={(e) => handleChange("description", e.target.value)}
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
           placeholder="Enter task description (optional)"
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
             <Flag className="w-4 h-4 inline mr-1" />
             Priority
           </label>
           <select
             value={formData.priority}
             onChange={(e) => handleChange("priority", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -117,7 +117,7 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
         <div>
           <label
             htmlFor="dueDate"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
           >
             <Calendar className="w-4 h-4 inline mr-1" />
             Due Date
@@ -128,14 +128,14 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
             value={formData.dueDate}
             onChange={(e) => handleChange("dueDate", e.target.value)}
             min={new Date().toISOString().split("T")[0]}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
           />
         </div>
 
         <div>
           <label
             htmlFor="category"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
           >
             <Tag className="w-4 h-4 inline mr-1" />
             Category
@@ -145,7 +145,7 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
             id="category"
             value={formData.category}
             onChange={(e) => handleChange("category", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
             placeholder="e.g., Work, Personal"
           />
         </div>
@@ -168,7 +168,7 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 flex items-center gap-2"
+            className="px-4 py-2 text-gray-600 dark:text-gray-200 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 flex items-center gap-2"
           >
             <X className="w-4 h-4" />
             Cancel
@@ -180,15 +180,15 @@ const TaskForm = ({ onSubmit, onCancel, editingTask, isInline = false }) => {
 
   if (isInline) {
     return (
-      <div className="bg-white rounded-lg border-2 border-blue-200 p-4 mb-4">
+      <div className="bg-white dark:bg-gray-900 rounded-lg border-2 border-blue-200 dark:border-blue-900 p-4 mb-4">
         {formContent}
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mb-6">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
         {editingTask ? (
           <Edit3 className="w-5 h-5" />
         ) : (

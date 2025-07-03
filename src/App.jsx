@@ -21,6 +21,7 @@ function App() {
     filter: "all",
     searchQuery: "",
     editingTask: null,
+    theme: "light", // add theme state
   });
 
   // Load user and tasks on app start
@@ -34,6 +35,17 @@ function App() {
       tasks: savedTasks.length === 0 ? initializeSampleData() : savedTasks,
     }));
   }, []);
+
+  // Persist theme to localStorage and load on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("taskTracker_theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      setAppState((prev) => ({ ...prev, theme: savedTheme }));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("taskTracker_theme", appState.theme);
+  }, [appState.theme]);
 
   // Save tasks whenever tasks change
   useEffect(() => {
@@ -95,6 +107,14 @@ function App() {
     updateState({ editingTask: null });
   };
 
+  // Theme toggle handler
+  const toggleTheme = () => {
+    setAppState((prev) => ({
+      ...prev,
+      theme: prev.theme === "dark" ? "light" : "dark",
+    }));
+  };
+
   // Filter and search tasks
   const filteredTasks = appState.tasks.filter((task) => {
     // Apply filter
@@ -136,37 +156,41 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50">
-      <Header
-        user={appState.user}
-        onLogout={handleLogout}
-        taskStats={taskStats}
-      />
-
-      <main className="max-w-4xl mx-auto px-4 pb-8">
-        <TaskForm
-          onSubmit={appState.editingTask ? handleEditTask : handleAddTask}
-          onCancel={appState.editingTask ? handleCancelEdit : undefined}
-          editingTask={appState.editingTask}
-          isInline={!!appState.editingTask}
+    <div className={`${appState.theme === "dark" ? "dark" : ""}`}>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-black dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+        <Header
+          user={appState.user}
+          onLogout={handleLogout}
+          taskStats={taskStats}
+          theme={appState.theme}
+          onToggleTheme={toggleTheme}
         />
 
-        <TaskFilter
-          currentFilter={appState.filter}
-          onFilterChange={(filter) => updateState({ filter })}
-          taskCounts={taskCounts}
-          searchQuery={appState.searchQuery}
-          onSearchChange={(searchQuery) => updateState({ searchQuery })}
-        />
+        <main className="max-w-4xl mx-auto px-4 pb-8">
+          <TaskForm
+            onSubmit={appState.editingTask ? handleEditTask : handleAddTask}
+            onCancel={appState.editingTask ? handleCancelEdit : undefined}
+            editingTask={appState.editingTask}
+            isInline={!!appState.editingTask}
+          />
 
-        <TaskList
-          tasks={filteredTasks}
-          onToggleComplete={handleToggleComplete}
-          onEdit={handleStartEdit}
-          onDelete={handleDeleteTask}
-          searchQuery={appState.searchQuery}
-        />
-      </main>
+          <TaskFilter
+            currentFilter={appState.filter}
+            onFilterChange={(filter) => updateState({ filter })}
+            taskCounts={taskCounts}
+            searchQuery={appState.searchQuery}
+            onSearchChange={(searchQuery) => updateState({ searchQuery })}
+          />
+
+          <TaskList
+            tasks={filteredTasks}
+            onToggleComplete={handleToggleComplete}
+            onEdit={handleStartEdit}
+            onDelete={handleDeleteTask}
+            searchQuery={appState.searchQuery}
+          />
+        </main>
+      </div>
     </div>
   );
 }
