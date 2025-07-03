@@ -1,12 +1,64 @@
-# React + Vite
+# Task Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, visually appealing task management app built with **React**, **Vite**, and **Tailwind CSS**.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚡ Fast and responsive UI with Vite + React
+- 🎨 Beautiful neon-inspired dark/light themes
+- 🔒 Simple login (username only, no password)
+- ✅ Track total, completed, and pending tasks
+- 📊 Completion stats and progress
+- 🌗 Theme toggle (dark/light mode)
+- 📱 Mobile-friendly and responsive design
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Start the development server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) to view the app.
+
+## 🛠️ Tech Stack
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
+
+## 📁 Project Structure
+
+- `src/components/` — React components (Login, Header, etc.)
+- `src/` — Main app logic and styles
+
+## 📸 Screenshots
+
+
+### Homepage (Dark)
+![Homepage Dark](public/Homepagedark.png)
+
+### Homepage (Light)
+![Homepage Light](public/HomepageWhite.png)
+
+### Login Page
+![Login Page](public/loginPage.png)
+
+### Pending Task
+![Pending Task](public/PendingTask.png)
+
+## 📄 License
+
+MIT
+
+---
+
+Made with ❤️ for productivity.
